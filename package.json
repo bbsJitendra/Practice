@@ -1,0 +1,11 @@
+{
+  "name": "todo-react-app",
+  "version": "1.0.0",
+  "description": "Simple React todo application using CDN.",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
