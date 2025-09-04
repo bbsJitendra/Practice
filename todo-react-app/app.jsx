@@ -22,32 +22,51 @@ function TodoApp() {
   };
 
   return (
-    <div className="todo-app">
-      <h1>Todo List</h1>
-      <div className="input-container">
-        <input
-          type="text"
-          placeholder="Add a task"
-          value={text}
-          onChange={e => setText(e.target.value)}
-        />
-        <button onClick={addTask}>Add</button>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-md p-6">
+        <h1 className="text-2xl font-bold mb-4 text-center">Todo List</h1>
+        <div className="flex gap-2 mb-4">
+          <input
+            type="text"
+            placeholder="Add a task"
+            value={text}
+            onChange={e => setText(e.target.value)}
+            className="flex-1 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            onClick={addTask}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          >
+            Add
+          </button>
+        </div>
+        <ul className="space-y-2">
+          {tasks.map(task => (
+            <li
+              key={task.id}
+              className="flex items-center justify-between border-b last:border-b-0 pb-2"
+            >
+              <label
+                className={`flex items-center gap-2 ${task.completed ? 'line-through text-gray-400' : ''}`}
+              >
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => toggleTask(task.id)}
+                  className="h-5 w-5 text-blue-600"
+                />
+                {task.text}
+              </label>
+              <button
+                onClick={() => removeTask(task.id)}
+                className="text-red-500 hover:text-red-700"
+              >
+                ✕
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul>
-        {tasks.map(task => (
-          <li key={task.id} className={task.completed ? 'completed' : ''}>
-            <label>
-              <input
-                type="checkbox"
-                checked={task.completed}
-                onChange={() => toggleTask(task.id)}
-              />
-              {task.text}
-            </label>
-            <button onClick={() => removeTask(task.id)}>X</button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
